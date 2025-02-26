@@ -1,0 +1,155 @@
+open System
+
+
+// Функция для ввода номера задания
+let rec CH prompt =
+    printf "%s" prompt
+    let input = Console.ReadLine()
+    match input with
+    | _ when input.Length < 1 ->
+        printfn "Введите  от 1 до 3"
+        CH prompt
+    | _ when input.Length > 3 ->
+        printfn "Введите  от 1 до 3"
+        CH prompt
+    | _ -> int input
+
+
+
+
+
+// Number 1
+
+// Функция для ввода символа
+let rec CHARinput prompt =
+    printf "%s" prompt
+    let input = Console.ReadLine()
+    match input with
+    | null | "" ->
+        printfn "Введите символ значение не может быть пустым"
+        CHARinput prompt
+    | _ when input.Length > 1 ->
+        printfn "Введите только один символ"
+        CHARinput prompt
+    | _ -> char input
+
+
+
+// Функция для ввода длины списка
+let rec INTinput prompt =
+    printf "%s" prompt
+    let input = Console.ReadLine()
+    match input with
+    | _ when input.Length < 1 ->
+        printfn "Введите положительно число"
+        INTinput prompt
+    | _ -> int input
+
+
+
+let rec generateList char1 char2 length index acc =
+    if index >= length then List.rev acc
+    else
+        let nextChar = if index % 2 = 0 then char1 else char2
+        generateList char1 char2 length (index + 1) (nextChar :: acc)
+
+let createAlternatingList (char1: char) (char2: char) length =
+    generateList char1 char2 length 0 []
+
+
+
+
+
+// Number 2
+
+// Функция для нахождения суммы цифр натурального числа
+let rec sumOfDigits n =
+    if n = 0 then 0
+    else (n % 10) + sumOfDigits (n / 10)
+
+
+
+
+// Number 3
+
+// Определение типа для комплексного числа
+type Complex = { Re: float; Im: float }
+
+// Функция сложения двух комплексных чисел
+let add (a: Complex) (b: Complex) =
+    { Re = a.Re + b.Re; Im = a.Im + b.Im }
+
+// Функция вычитания двух комплексных чисел
+let subtract (a: Complex) (b: Complex) =
+    { Re = a.Re - b.Re; Im = a.Im - b.Im }
+
+// Функция умножения двух комплексных чисел
+let multiply (a: Complex) (b: Complex) =
+    { Re = a.Re * b.Re - a.Im * b.Im; Im = a.Re * b.Im + a.Im * b.Re }
+
+// Функция деления двух комплексных чисел
+let divide (a: Complex) (b: Complex) =
+    
+    let denominator = b.Re * b.Re + b.Im * b.Im
+    if denominator = 0.0 then failwith "Деление на ноль" 
+    else
+        { Re = (a.Re * b.Re + a.Im * b.Im) / denominator;
+          Im = (a.Im * b.Re - a.Re * b.Im) / denominator }
+
+// Функция возведения комплексного числа в целочисленную степень
+let rec power (a: Complex) (n: int) =
+    if n = 0 then { Re = 1.0; Im = 0.0 }
+    elif n = 1 then a
+    else multiply a (power a (n - 1))
+    
+
+
+
+
+
+// Основная программа
+let run1 () =
+    let char1 = CHARinput "Введите первый символ: "
+    let char2 = CHARinput "Введите второй символ: "
+    let length = INTinput "Введите длину списка: "
+    
+    
+    let resultList = createAlternatingList char1 char2 length
+    printfn "Список: %A" resultList
+
+    
+
+let run2 () = 
+    let sum = INTinput "Введите натуральное число: "
+
+    let resultSum = sumOfDigits sum
+    printfn "Сумма цифр: %d" resultSum
+
+
+let run3 () = 
+   let a = { Re = 3.0; Im = 2.0 }
+   let b = { Re = 1.0; Im = -4.0 }
+
+   let sum = add a b
+   let diff = subtract a b
+   let prod = multiply a b
+   let quot = divide a b
+   let pow = power a 3
+
+   printfn "Сложение: %A" sum
+   printfn "Вычитание: %A" diff
+   printfn "Умножение: %A" prod
+   printfn "Деление: %A" quot
+   printfn "Возведение в степень: %A" pow
+
+
+let mainrun () =
+    let choose = CH "Введите номер задания для проверки"
+
+    if choose = 1 then run1()
+    if choose = 2 then run2()
+    if choose = 3 then run3()
+
+    
+        
+mainrun()
