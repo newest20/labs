@@ -153,3 +153,46 @@ let mainrun () =
     
         
 mainrun()
+
+
+(*// Тесты для задания 1
+let runTest1 () =
+    let resultList1 = createAlternatingList 'A' 'B' 5
+    printfn "Тест 1.1 (Ожидается: ['A'; 'B'; 'A'; 'B'; 'A']): %A" resultList1
+
+    let resultList2 = createAlternatingList 'X' 'Y' 6
+    printfn "Тест 1.2 (Ожидается: ['X'; 'Y'; 'X'; 'Y'; 'X'; 'Y']): %A" resultList2
+
+// Тесты для задания 2
+let runTest2 () =
+    let sum1 = sumOfDigits 12345
+    printfn "Тест 2.1 (Ожидается: 15): %d" sum1
+
+    let sum2 = sumOfDigits 987
+    printfn "Тест 2.2 (Ожидается: 24): %d" sum2
+
+// Тесты для задания 3
+let runTest3 () =
+    let a = { Re = 3.0; Im = 2.0 }
+    let b = { Re = 1.0; Im = -4.0 }
+
+    let sum = add a b
+    printfn "Тест 3.1 (Сложение, Ожидается: { Re = 4.0; Im = -2.0 }): %A" sum
+
+    let prod = multiply a b
+    printfn "Тест 3.2 (Умножение, Ожидается: { Re = 11.0; Im = -10.0 }): %A" prod
+
+// Основная функция запуска тестов
+let runTests () =
+    printfn "Запуск тестов для задания 1..."
+    runTest1()
+    
+    printfn "Запуск тестов для задания 2..."
+    runTest2()
+
+    printfn "Запуск тестов для задания 3..."
+    runTest3()
+
+// Запуск тестов
+runTests()
+*)
